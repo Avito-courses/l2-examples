@@ -39,8 +39,9 @@ func queryLoop(ctx context.Context, _ *pgxpool.Pool) {
 		case <-time.After(1 * time.Second):
 			fmt.Println("делаем запрос через пул")
 		case <-ctx.Done():
+			fmt.Println("завершаем работу сервера...")
 			time.Sleep(5 * time.Second)
-			fmt.Println("bye")
+			fmt.Println("готово")
 			return
 		}
 	}

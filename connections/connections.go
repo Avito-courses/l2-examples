@@ -2,6 +2,7 @@ package connections
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
 	"time"
@@ -53,9 +54,11 @@ func getConnectionString() string {
 		log.Fatal("Error loading .env file")
 	}
 
-	connString := os.Getenv("DB_CONNECTION_STRING")
-	if connString == "" {
-		log.Fatal("DB_CONNECTION_STRING not set in .env file")
-	}
-	return connString
+	host := os.Getenv("POSTGRES_HOST")
+	port := os.Getenv("POSTGRES_PORT")
+	user := os.Getenv("POSTGRES_USER")
+	password := os.Getenv("POSTGRES_PASSWORD")
+	dbname := os.Getenv("POSTGRES_DB")
+
+	return fmt.Sprintf("postgres://%s:%s@%s:%s/%s", user, password, host, port, dbname)
 }

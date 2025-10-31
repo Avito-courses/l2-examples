@@ -3,7 +3,7 @@ include .env
 export $(shell sed 's/=.*//' .env)
 
 GOOSE_DRIVER = postgres
-GOOSE_DBSTRING = $(DB_CONNECTION_STRING)
+GOOSE_DBSTRING = postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST):$(POSTGRES_PORT)/$(POSTGRES_DB)
 MIGRATIONS_DIR = migrations
 
 .PHONY: migrate-up migrate-down migrate-status
